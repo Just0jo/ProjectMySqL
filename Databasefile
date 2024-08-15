@@ -1,0 +1,38 @@
+CREATE TABLE instrument (
+    id INT NOT NULL AUTO_INCREMENT,
+    NAME VARCHAR(100) NOT NULL,
+    TYPE VARCHAR(50) NOT NULL,
+    BRAND VARCHAR(50) NOT NULL,
+    PRICE VARCHAR(50)  NOT NULL,
+    PRIMARY KEY (id)
+);
+CREATE TABLE rent (
+    id INT NOT NULL AUTO_INCREMENT,
+    Instruments_id INT NOT NULL,
+    RENT_date DATE NOT NULL,
+    RETURN_date DATE,
+    PRIMARY KEY (id),
+    FOREIGN KEY (instrument_id) REFERENCES INSTRUMENT(id)
+);
+
+INSERT INTO instrument (NAME, TYPE, BRAND, PRICE) VALUES
+('violin', 'strings', 'cremona', '399'),
+('viola', 'strings', 'cremona', '499'),
+('cello', 'strings', 'cremona', '299'),
+('flute', 'wind', 'yamaha', '699'),
+('trumpet', 'wind', 'yamaha', '799'),
+('trombone', 'wind', 'yamaha', '599'),
+('drum kit', 'percussion', 'thomann', '1099'),
+('tambourine', 'percussion', 'thomann', '99'),
+('timpani', 'percussion', 'thomann', '199');
+
+INSERT INTO instrument (INSTRUMENT_id, RENT_date, RETURN_date) VALUES
+('10', '2024-01-09', '2024-10-09'),
+('11', '2024-02-09', '2024-11-09'),
+('12', '2024-03-09', '2024-12-09'),
+('13', '2024-04-09', '2024-05-09'),
+('14', '2024-05-09', '2024-06-09'),
+('15', '2024-06-09', '2024-07-09'),
+('16', '2024-07-09', '2024-08-09'),
+('17', '2024-08-09', '2024-09-09'),
+('18', '2024-09-09', '2024-10-09');
