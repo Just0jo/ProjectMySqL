@@ -8,6 +8,5 @@ public interface operations<instruments> {
     ArrayList<instruments> getAll();
     void update(int id, instruments item);
     void delete(int id);
-    //FOR NOW X IS JUST A HOLDER FOR ONE OF THE CALLS I WANT TO PERFORM AN OPERATION ON
 }
 

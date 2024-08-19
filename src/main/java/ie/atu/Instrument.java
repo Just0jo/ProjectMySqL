@@ -13,10 +13,18 @@ public  class Instrument {
         this.price = price;
     }
 
-    public int getId() { return id; }
-    public String getName() { return name; }
-    public String getBrand() { return brand; }
-    public double getPrice() { return price; }
+    public int getId()
+    {
+        return id; }
+    public String getName()
+    {
+        return name; }
+    public String getBrand()
+    {
+        return brand; }
+    public double getPrice()
+    {
+        return price; }
 
 
 
