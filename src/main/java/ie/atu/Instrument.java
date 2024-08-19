@@ -18,7 +18,7 @@ public  class Instrument {
     public String getBrand() { return brand; }
     public double getPrice() { return price; }
 
-    public void playSound() {
+
 
     }
-}
+

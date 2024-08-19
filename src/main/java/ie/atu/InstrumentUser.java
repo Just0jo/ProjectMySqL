@@ -4,11 +4,11 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class InstrumentUser {
-    private static final String INSERT_SQL = "INSERT INTO instruments (name, brand, price) VALUES (?, ?, ?)";
-    private static final String SELECT_SQL = "SELECT * FROM instruments WHERE id = ?";
-    private static final String SELECT_ALL_SQL = "SELECT * FROM instruments";
-    private static final String UPDATE_SQL = "UPDATE instruments SET name = ?, brand = ?, price = ? WHERE id = ?";
-    private static final String DELETE_SQL = "DELETE FROM instruments WHERE id = ?";
+    private  String INSERT_SQL = "INSERT INTO instruments (name, brand, price) VALUES (?, ?, ?)";
+    private  String SELECT_SQL = "SELECT * FROM instruments WHERE id = ?";
+    private  String SELECT_ALL_SQL = "SELECT * FROM instruments";
+    private  String UPDATE_SQL = "UPDATE instruments SET name = ?, brand = ?, price = ? WHERE id = ?";
+    private  String DELETE_SQL = "DELETE FROM instruments WHERE id = ?";
 
     private static final String SELECT_RENT_BY_INSTRUMENT_SQL = "SELECT * FROM rents WHERE Instruments_id = ?";
     private static final String SELECT_ALL_RENTS_SQL = "SELECT * FROM rents";
