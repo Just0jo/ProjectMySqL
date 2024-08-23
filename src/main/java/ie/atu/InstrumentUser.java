@@ -18,7 +18,8 @@ public class InstrumentUser {
     public InstrumentUser() {
         try {
             this.connection = DatabaseConnection.getConnection();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -26,12 +27,13 @@ public class InstrumentUser {
     public void addInstrument(Instrument instrument) {
         try (PreparedStatement statement = connection.prepareStatement(INSERT_SQL)) {
             statement.setString(1, instrument.getName());
-            statement.setString(2, instrument.getBrand());  // Corrected
-            statement.setDouble(3, instrument.getPrice());  // Corrected
-            statement.setString(4, instrument.getType());   // Corrected
+            statement.setString(2, instrument.getBrand());
+            statement.setDouble(3, instrument.getPrice());
+            statement.setString(4, instrument.getType());
             statement.executeUpdate();
             System.out.println("Instrument added successfully.");
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -46,10 +48,10 @@ public class InstrumentUser {
                         resultSet.getString("name"),
                         resultSet.getString("brand"),
                         resultSet.getString("type"),
-                        resultSet.getDouble("price")
-                );
+                        resultSet.getDouble("price"));
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
@@ -66,7 +68,8 @@ public class InstrumentUser {
                         + ", Type: " + resultSet.getString("type")
                         + ", Price: " + resultSet.getDouble("price"));
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -74,17 +77,19 @@ public class InstrumentUser {
     public void updateInstrument(Instrument instrument) {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
             statement.setString(1, instrument.getName());
-            statement.setString(2, instrument.getBrand());  // Corrected
-            statement.setDouble(3, instrument.getPrice());  // Corrected
-            statement.setString(4, instrument.getType());   // Corrected
-            statement.setInt(5, instrument.getId());        // Corrected
+            statement.setString(2, instrument.getBrand());
+            statement.setDouble(3, instrument.getPrice());
+            statement.setString(4, instrument.getType());
+            statement.setInt(5, instrument.getId());
             int rowsUpdated = statement.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("Instrument updated successfully.");
-            } else {
+            }
+            else {
                 System.out.println("Instrument not found.");
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -95,10 +100,12 @@ public class InstrumentUser {
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {
                 System.out.println("Instrument deleted successfully.");
-            } else {
+            }
+            else {
                 System.out.println("Instrument not found.");
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -113,7 +120,8 @@ public class InstrumentUser {
                             + ", Return Date: " + resultSet.getString("RETURN_date"));
                 }
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -128,7 +136,8 @@ public class InstrumentUser {
                         + ", Rental Date: " + resultSet.getString("RENT_date")
                         + ", Return Date: " + resultSet.getString("RETURN_date"));
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -198,13 +207,13 @@ public class InstrumentUser {
                 case 5:
                     System.out.println("Enter ID to delete: ");
                     int deleteId = scanner.nextInt();
-                    scanner.nextLine();  // Consume newline
+                    scanner.nextLine();
                     deleteInstrument(deleteId);
                     break;
                 case 6:
                     System.out.println("Enter Instrument ID: ");
                     int Instrument_id = scanner.nextInt();
-                    scanner.nextLine();  // Consume newline
+                    scanner.nextLine();
                     getRentalsByInstrument(Instrument_id);
                     break;
                 case 7:
