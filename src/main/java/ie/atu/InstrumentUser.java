@@ -5,10 +5,10 @@ import java.util.Scanner;
 
 public class InstrumentUser {
     private static final String INSERT_SQL = "INSERT INTO instruments (name, brand, price, type) VALUES (?, ?, ?, ?)";
-    private  String SELECT_SQL = "SELECT * FROM instruments WHERE id = ?";
-    private  String SELECT_ALL_SQL = "SELECT * FROM instruments";
+    private static final String SELECT_SQL = "SELECT * FROM instruments WHERE id = ?";
+    private static final String SELECT_ALL_SQL = "SELECT * FROM instruments";
     private static final String UPDATE_SQL = "UPDATE instruments SET name = ?, brand = ?, price = ?, type = ? WHERE id = ?";
-    private  String DELETE_SQL = "DELETE FROM instruments WHERE id = ?";
+    private static final String DELETE_SQL = "DELETE FROM instruments WHERE id = ?";
 
     private static final String SELECT_RENT_BY_INSTRUMENT_SQL = "SELECT * FROM rents WHERE Instruments_id = ?";
     private static final String SELECT_ALL_RENTS_SQL = "SELECT * FROM rents";
@@ -26,9 +26,9 @@ public class InstrumentUser {
     public void addInstrument(Instrument instrument) {
         try (PreparedStatement statement = connection.prepareStatement(INSERT_SQL)) {
             statement.setString(1, instrument.getName());
-            statement.setString(2, instrument.getBrand());
-            statement.setDouble(3, instrument.getPrice());
-            statement.setString(4, instrument.getType());
+            statement.setString(2, instrument.getBrand());  // Corrected
+            statement.setDouble(3, instrument.getPrice());  // Corrected
+            statement.setString(4, instrument.getType());   // Corrected
             statement.executeUpdate();
             System.out.println("Instrument added successfully.");
         } catch (SQLException e) {
@@ -43,9 +43,9 @@ public class InstrumentUser {
             if (resultSet.next()) {
                 return new Instrument(
                         resultSet.getInt("id"),
-                        resultSet.getString("type"),
                         resultSet.getString("name"),
                         resultSet.getString("brand"),
+                        resultSet.getString("type"),
                         resultSet.getDouble("price")
                 );
             }
@@ -61,9 +61,9 @@ public class InstrumentUser {
 
             while (resultSet.next()) {
                 System.out.println("ID: " + resultSet.getInt("id")
-                        + ", Type: " + resultSet.getString("type")
                         + ", Name: " + resultSet.getString("name")
                         + ", Brand: " + resultSet.getString("brand")
+                        + ", Type: " + resultSet.getString("type")
                         + ", Price: " + resultSet.getDouble("price"));
             }
         } catch (SQLException e) {
@@ -74,10 +74,10 @@ public class InstrumentUser {
     public void updateInstrument(Instrument instrument) {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
             statement.setString(1, instrument.getName());
-            statement.setString(2, instrument.getType());
-            statement.setString(3, instrument.getBrand());
-            statement.setDouble(4, instrument.getPrice());
-            statement.setInt(5, instrument.getId());
+            statement.setString(2, instrument.getBrand());  // Corrected
+            statement.setDouble(3, instrument.getPrice());  // Corrected
+            statement.setString(4, instrument.getType());   // Corrected
+            statement.setInt(5, instrument.getId());        // Corrected
             int rowsUpdated = statement.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("Instrument updated successfully.");
@@ -102,6 +102,7 @@ public class InstrumentUser {
             e.printStackTrace();
         }
     }
+
     public void getRentalsByInstrument(int Instruments_id) {
         try (PreparedStatement statement = connection.prepareStatement(SELECT_RENT_BY_INSTRUMENT_SQL)) {
             statement.setInt(1, Instruments_id);
@@ -152,13 +153,13 @@ public class InstrumentUser {
                 case 1:
                     System.out.println("Enter name: ");
                     String name = scanner.nextLine();
+                    System.out.println("Enter type: ");
+                    String type = scanner.nextLine();
                     System.out.println("Enter brand: ");
                     String brand = scanner.nextLine();
                     System.out.println("Enter price: ");
                     double price = scanner.nextDouble();
                     scanner.nextLine();
-                    System.out.println("Enter type: ");
-                    String type = scanner.nextLine();
                     addInstrument(new Instrument(0, name, type, brand, price));
                     break;
                 case 2:
@@ -169,8 +170,8 @@ public class InstrumentUser {
                     if (instrument != null) {
                         System.out.println("ID: " + instrument.getId()
                                 + ", Name: " + instrument.getName()
-                                + ", Type: " + instrument.getType()
                                 + ", Brand: " + instrument.getBrand()
+                                + ", Type: " + instrument.getType()
                                 + ", Price: " + instrument.getPrice());
                     } else {
                         System.out.println("Instrument not found.");
@@ -185,13 +186,13 @@ public class InstrumentUser {
                     scanner.nextLine();
                     System.out.println("Enter new name: ");
                     String newName = scanner.nextLine();
+                    System.out.println("Enter new type: ");
+                    String newType = scanner.nextLine();
                     System.out.println("Enter new brand: ");
                     String newBrand = scanner.nextLine();
                     System.out.println("Enter new price: ");
                     double newPrice = scanner.nextDouble();
                     scanner.nextLine();
-                    System.out.println("Enter new type: ");
-                    String newType = scanner.nextLine();
                     updateInstrument(new Instrument(updateId, newName, newType, newBrand, newPrice));
                     break;
                 case 5:
